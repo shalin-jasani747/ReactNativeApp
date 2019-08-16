@@ -41,6 +41,8 @@
     "react-native-vector-icons": "6.1.0",
     "react-navigation": "3.11.0",
     "react-navigation-redux-helpers": "^3.0.2",
+    "react-native-form-validator": "https://github.com/thegamenicorus/react-native-form-validator.git",
+    "react-native-ui-lib": "https://github.com/thegamenicorus/react-native-ui-lib.git",
     "react-redux": "^6.0.0",
     "redux": "^4.0.0",
     "redux-persist": "^5.10.0",
