@@ -1,9 +1,18 @@
 rootProject.name = 'ReactNativeApp'
+include ':react-native-device-info'
+project(':react-native-device-info').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-device-info/android')
+include ':react-native-config'
+project(':react-native-config').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-config/android')
+include ':react-native-image-picker'
+project(':react-native-image-picker').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-image-picker/android')
+include ':react-native-view-overflow'
+project(':react-native-view-overflow').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-view-overflow/android')
 include ':react-native-i18n'
 project(':react-native-i18n').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-i18n/android')
 include ':react-native-vector-icons'
 project(':react-native-vector-icons').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-vector-icons/android')
 include ':react-native-gesture-handler'
 project(':react-native-gesture-handler').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-gesture-handler/android')
-
+include ':react-native-ui-lib'
+project(':react-native-ui-lib').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-ui-lib/lib/android')
 include ':app'

@@ -7,11 +7,13 @@ import DebugConfig from '../Config/DebugConfig'
 
 import { StartupTypes } from '../Redux/StartupRedux'
 import { GithubTypes } from '../Redux/GithubRedux'
+import { VideoTypes } from '../Redux/VideoRedux'
 
 /* ------------- Sagas ------------- */
 
 import { startup } from './StartupSagas'
 import { getUserAvatar } from './GithubSagas'
+import { getVideo } from './VideoSagas'
 
 /* ------------- API ------------- */
 
@@ -27,6 +29,7 @@ export default function * root () {
     takeLatest(StartupTypes.STARTUP, startup),
 
     // some sagas receive extra parameters in addition to an action
-    takeLatest(GithubTypes.USER_REQUEST, getUserAvatar, api)
+    takeLatest(GithubTypes.USER_REQUEST, getUserAvatar, api),
+    takeLatest(VideoTypes.VIDEO_REQUEST, getVideo, api)
   ])
 }
