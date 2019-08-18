@@ -32,31 +32,20 @@ class Video extends React.Component {
   render () {
     let { fetching, payload} = this.props.video
     return (
-      <ScrollView style={styles.container}>
-        <View center>
-          {(fetching) ? (
-            <View marginT-20>
+      <View>
+         <FlatList
+            data={payload}
+            refreshing={fetching}
+            onRefresh={ () => this.props.fetchVideo()}
+            renderItem={({item, index}) => this.renderRow(item, index)}
+            keyExtractor={(item, index) => index.toString()}
+            ListFooterComponent={(false) ? (<View style={{marginTop: 10}}>
               <ActivityIndicator />
-            </View>
-          ) : (
-            <FlatList
-              ref='list'
-              data={payload}
-              renderItem={({item, index}) => this.renderRow(item, index)}
-              keyExtractor={(item, index) => index.toString()}
-              ListFooterComponent={(false) ? (<View style={{marginTop: 10}}>
-                <ActivityIndicator />
-              </View>) : null}
-              onEndReachedThreshold={1}
-              onEndReached={() => {
-                if (false) {
-                  // this.submit(true)
-                }
-              }}
-            />)
-          }
-        </View>
-      </ScrollView>
+            </View>) : null}
+            onEndReachedThreshold={1}
+            onEndReached={() => this.props.loadMoreVideos(payload)}
+          />
+      </View>
     )
   }
 }
@@ -69,7 +58,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchVideo: () => dispatch(VideoActions.videoRequest())
+    fetchVideo: () => dispatch(VideoActions.videoRequest()),
+    loadMoreVideos: (payload) => dispatch(VideoActions.loadMoreVideos(payload))
   }
 }
 

@@ -5,8 +5,11 @@ import Immutable from 'seamless-immutable'
 
 const { Types, Creators } = createActions({
   loginRequest: ['data'],
-  loginSuccess: ['payload'],
-  loginFailure: null
+  loginSuccess: ['isUserLoggedIn'],
+  loginFailure: null,
+  saveUserDetails: ['user'],
+  updateUserDetails: ['user'],
+  logout: null
 })
 
 export const LoginTypes = Types
@@ -18,8 +21,17 @@ export const INITIAL_STATE = Immutable({
   data: null,
   fetching: null,
   payload: null,
-  error: null
+  error: null,
+  isUserLoggedIn: false,
+  user: null
 })
+
+/* ------------- Selectors ------------- */
+
+export const LoginSelectors = {
+  isUserLoggedIn: state => state.login.isUserLoggedIn,
+  isUserSignedUp: state => state.login.user !== null
+}
 
 /* ------------- Reducers ------------- */
 
@@ -29,18 +41,28 @@ export const request = (state, { data }) =>
 
 // successful api lookup
 export const success = (state, action) => {
-  const { payload } = action
-  return state.merge({ fetching: false, error: null, payload })
+  const { isUserLoggedIn } = action
+  return state.merge({ fetching: false, error: null, isUserLoggedIn })
 }
 
 // Something went wrong somewhere.
 export const failure = state =>
   state.merge({ fetching: false, error: true, payload: null })
 
+export const saveDetails = (state, action) => {
+  const { user } = action
+  return state.merge({ fetching: false, error: null, user, isUserLoggedIn: true })
+}
+
+export const logout = state => INITIAL_STATE
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.LOGIN_REQUEST]: request,
   [Types.LOGIN_SUCCESS]: success,
-  [Types.LOGIN_FAILURE]: failure
+  [Types.LOGIN_FAILURE]: failure,
+  [Types.SAVE_USER_DETAILS]: saveDetails,
+  [Types.UPDATE_USER_DETAILS]: saveDetails,
+  [Types.LOGOUT]: logout
 })

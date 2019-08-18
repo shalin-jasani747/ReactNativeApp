@@ -1,0 +1,155 @@
+{
+  "ok": true,
+  "strip": [
+    {
+      "total_hardness": [
+        {
+          "value": 0,
+          "color": "#355d8a"
+        },
+        {
+          "value": 110,
+          "color": "#59678e"
+        },
+        {
+          "value": 250,
+          "color": "#5e5c87"
+        },
+        {
+          "value": 500,
+          "color": "#705075"
+        },
+        {
+          "value": 1000,
+          "color": "#8f5981"
+        }
+      ],
+      "selectedStripe": {}
+    },
+    {
+      "total_chlorine": [
+        {
+          "value": 0,
+          "color": "#feec7f"
+        },
+        {
+          "value": 1,
+          "color": "#f7f38e"
+        },
+        {
+          "value": 3,
+          "color": "#e3e67f"
+        },
+        {
+          "value": 5,
+          "color": "#adc8a1"
+        },
+        {
+          "value": 10,
+          "color": "#92bc9b"
+        }
+      ],
+      "selectedStripe": {}
+    },
+    {
+      "free_chlorine": [
+        {
+          "value": 0,
+          "color": "#fdeda6"
+        },
+        {
+          "value": 1,
+          "color": "#e4d9cb"
+        },
+        {
+          "value": 3,
+          "color": "#ac96b6"
+        },
+        {
+          "value": 5,
+          "color": "#8f6d9c"
+        },
+        {
+          "value": 10,
+          "color": "#6f477e"
+        }
+      ],
+      "selectedStripe": {}
+    },
+    {
+      "pH": [
+        {
+          "value": 6.2,
+          "color": "#d59258"
+        },
+        {
+          "value": 6.8,
+          "color": "#df7c50"
+        },
+        {
+          "value": 7.2,
+          "color": "#c45c3d"
+        },
+        {
+          "value": 7.8,
+          "color": "#c15b53"
+        },
+        {
+          "value": 8.4,
+          "color": "#c74550"
+        }
+      ],
+      "selectedStripe": {}
+    },
+    {
+      "total_alkalinity": [
+        {
+          "value": 0,
+          "color": "#cc9d59"
+        },
+        {
+          "value": 40,
+          "color": "#9e9358"
+        },
+        {
+          "value": 120,
+          "color": "#6c7f6f"
+        },
+        {
+          "value": 180,
+          "color": "#436e66"
+        },
+        {
+          "value": 240,
+          "color": "#406971"
+        }
+      ],
+      "selectedStripe": {}
+    },
+    {
+      "cyanuric_acid": [
+        {
+          "value": 0,
+          "color": "#be8952"
+        },
+        {
+          "value": 50,
+          "color": "#b56b3f"
+        },
+        {
+          "value": 100,
+          "color": "#a44d52"
+        },
+        {
+          "value": 150,
+          "color": "#85355c"
+        },
+        {
+          "value": 300,
+          "color": "#7a3c75"
+        }
+      ],
+      "selectedStripe": {}
+    }
+  ]
+}

@@ -1,12 +1,14 @@
 import { createReducer, createActions } from 'reduxsauce'
 import Immutable from 'seamless-immutable'
+import * as _ from 'lodash'
 
 /* ------------- Types and Action Creators ------------- */
 
 const { Types, Creators } = createActions({
   videoRequest: null,
   videoSuccess: ['payload'],
-  videoFailure: null
+  videoFailure: null,
+  loadMoreVideos: ['payload']
 })
 
 export const VideoTypes = Types
@@ -36,10 +38,15 @@ export const success = (state, action) => {
 export const failure = state =>
   state.merge({ fetching: false, error: true })
 
+export const loadMoreVideo = (state, { payload }) => {
+  return state.merge({ fetching: false, error: null, payload: [...state.payload, ...payload] })
+}
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.VIDEO_REQUEST]: request,
   [Types.VIDEO_SUCCESS]: success,
-  [Types.VIDEO_FAILURE]: failure
+  [Types.VIDEO_FAILURE]: failure,
+  [Types.LOAD_MORE_VIDEOS]: loadMoreVideo
 })

@@ -1,8 +1,11 @@
 // @flow
 
 import { StyleSheet } from 'react-native'
-import { ApplicationStyles } from '../../Themes/'
+import { ApplicationStyles, Metrics } from '../../Themes/'
 
 export default StyleSheet.create({
-  ...ApplicationStyles.screen
+  ...ApplicationStyles.screen,
+  logo: {
+    paddingVertical: Metrics.screenHeight / 6
+  }
 })

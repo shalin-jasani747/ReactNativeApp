@@ -90,11 +90,13 @@ const HomeTabView = createBottomTabNavigator(
 const PrimaryNav = createStackNavigator({
   LaunchScreen: { screen: LaunchScreen },
   Authorization: { screen: AuthorizationStack },
-  Home: { screen: HomeTabView }
+  Home: { screen: HomeTabView },
+  SignUp: { screen: SignUpScreen }
+
 }, {
   // Default config for all screens
   headerMode: 'none',
-  initialRouteName: 'Home',
+  initialRouteName: 'SignUp',
   navigationOptions: {
     headerStyle: styles.header
   }

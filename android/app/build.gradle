@@ -138,6 +138,8 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-share')
+    implementation project(':react-native-video')
     implementation project(':react-native-device-info')
     implementation project(':react-native-config')
     implementation project(':react-native-image-picker')

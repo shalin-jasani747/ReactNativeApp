@@ -11,7 +11,8 @@ export const reducers = combineReducers({
   search: require('./SearchRedux').reducer,
   login: require('./LoginRedux').reducer,
   user: require('./UserRedux').reducer,
-  video: require('./VideoRedux').reducer
+  video: require('./VideoRedux').reducer,
+  strip: require('./StripRedux').reducer
 })
 
 export default () => {
