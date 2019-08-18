@@ -9,8 +9,9 @@ import ProfileScreen from '../Containers/Profile'
 import React from 'react'
 import styles from './Styles/NavigationStyles'
 import { Colors, Metrics } from '../Themes'
-import Icon from 'react-native-vector-icons/Ionicons';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import Entypo from 'react-native-vector-icons/Entypo';
 
 const tabviewConfigs = {
   lazy: true,
@@ -56,9 +57,9 @@ const HomeTabView = createBottomTabNavigator(
       navigationOptions: {
         tabBarLabel: 'Video',
         tabBarIcon: ({ tintColor, focused }) => (
-          <Icon
+          <Entypo
             size={30}
-            name={focused ? 'ios-home' : 'ios-home'}
+            name={'video'}
             color={tintColor}
           />
         )
@@ -69,7 +70,7 @@ const HomeTabView = createBottomTabNavigator(
       navigationOptions: ({ navigation }) => ({
         tabBarLabel: 'Strip',
         tabBarIcon: ({ tintColor, focused }) => (
-          <MaterialIcons size={30} name="store" color={tintColor} />
+          <MaterialCommunityIcons size={30} name="test-tube" color={tintColor} />
         )
       })
     },
@@ -78,7 +79,7 @@ const HomeTabView = createBottomTabNavigator(
       navigationOptions: ({ navigation }) => ({
         tabBarLabel: 'Profile',
         tabBarIcon: ({ tintColor, focused }) => (
-          <MaterialIcons size={30} name="store" color={tintColor} />
+          <AntDesign size={30} name="profile" color={tintColor} />
         )
       })
     }
@@ -96,7 +97,7 @@ const PrimaryNav = createStackNavigator({
 }, {
   // Default config for all screens
   headerMode: 'none',
-  initialRouteName: 'SignUp',
+  initialRouteName: 'Authorization',
   navigationOptions: {
     headerStyle: styles.header
   }

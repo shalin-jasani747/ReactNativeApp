@@ -118,11 +118,11 @@ class Login extends ValidationComponent {
   render () {
     const { email, emailError, password, passwordError, rememberMe} = this.state
     return (
-      <ScrollView style={styles.container}>
+      <ScrollView style={[styles.container, {backgroundColor: '#edf0f8'}]}>
         <KeyboardAvoidingView behavior='position'>
           <View style={styles.mainContainer}>
             <View center paddingT-20>
-              <Text style={{fontSize: 18, fontWeight: '700'}}>Login</Text>
+              <Text style={styles.loginText}>Login</Text>
             </View>
             <View center style={styles.logo}>
               <Image source={Images.logo} resizeMode='stretch'/>

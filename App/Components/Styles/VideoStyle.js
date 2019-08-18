@@ -55,5 +55,6 @@ export default StyleSheet.create({
     borderRadius: 15,
     borderColor: '#000',
     borderWidth: 1
-  }
+  },
+  videoTitle: { marginBottom: 10, fontSize: 18}
 })

@@ -4,21 +4,19 @@ import React from 'react'
 import { View, Text, TouchableWithoutFeedback } from 'react-native'
 import { Image } from 'react-native-ui-lib'
 import styles from './Styles/VideoStyle'
-import Share from 'react-native-share';
-
-const shareOptions = {
-  title: 'Share via',
-  message: 'some message',
-  url: 'some share url',
-  social: Share.Social.EMAIL
-}
+import Share from 'react-native-share'
 
 export default class Video extends React.Component {
 
-  socialShare(){
-    Share.open(shareOptions)
+  socialShare(thumbnailUrl){
+    Share.open({
+      title: 'Share via',
+      message: 'Awesome Video',
+      url: `${thumbnailUrl}`,
+      social: Share.Social.EMAIL
+    })
       .then((res) => { console.log(res) })
-      .catch((err) => { err && console.log(err); });
+      .catch((err) => { err && console.log(err) })
   }
 
   render () {
@@ -26,10 +24,10 @@ export default class Video extends React.Component {
     return (
       <View style={styles.videoContainer}>
         <View style={styles.outerContainer} >
-          <Text style={{ marginBottom: 10, fontSize: 18}}>{title}</Text>
+          <Text style={styles.videoTitle}>{title}</Text>
         </View>
         <View style={styles.innerContainer} >
-          <TouchableWithoutFeedback onPress={() => this.socialShare()}>
+          <TouchableWithoutFeedback onPress={() => this.socialShare(thumbnail_url)}>
             <Image source={{uri: thumbnail_url}} style={styles.videoImage} resizeMode='cover' />
           </TouchableWithoutFeedback>
         </View>

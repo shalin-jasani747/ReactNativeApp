@@ -24,14 +24,14 @@ export default class Strip extends React.Component {
     let stripeColor = _.isUndefined(strip.selectedStripe.color) ? '' : strip.selectedStripe.color
     return (
       <View style={styles.container}>
-        <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
-          <View style={{flexDirection: 'row', alignItems: 'flex-start', bottom: 5}}>
-            <Text color={'#aeafb0'} style={{fontSize: 15, fontWeight: '700' }}>{ stringCase }</Text>
+        <View style={styles.stripRightUpperBlock}>
+          <View style={styles.stripRightUpperBlockView}>
+            <Text color={'#aeafb0'} style={styles.stripRightUpperBlockViewText}>{ stringCase }</Text>
             <Text color={'#aeafb0'} style={{fontSize: 15 }}> (ppm)</Text>
           </View>
           <View>
             <TextInput
-              style={{ borderColor: '#e8e8e8', color: '#3585b2', fontWeight: '700', width: '22%', borderWidth: 1, paddingHorizontal: 10, paddingVertical: 5, borderRadius: 5, marginBottom: 0 }}
+              style={styles.rightBlockTextInput}
               placeholder='0'
               placeholderTextColor={'#e8e8e8'}
               autoCapitalize="none"
@@ -46,7 +46,7 @@ export default class Strip extends React.Component {
             />
           </View>
         </View>
-        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', height: 30}}>
+        <View style={styles.stripeColorBlockView}>
           {
             _.map(strip[stripKey], (o, key) => (
               <View key={key} style={[{flex: 1, justifyContent: 'center'}, (key !== (strip[stripKey].length - 1)) ? { paddingRight: 5 } : {paddingRight: 0}]}>

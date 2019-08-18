@@ -5,7 +5,6 @@ import { ScrollView, KeyboardAvoidingView, TouchableWithoutFeedback, Alert } fro
 import { connect } from 'react-redux'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 import StripActions from '../Redux/StripRedux'
-import { Metrics } from '../Themes'
 // external libs
 import { View, Text } from 'react-native-ui-lib'
 import StripView from '../Components/Strip'
@@ -26,8 +25,9 @@ class Strip extends React.Component {
     _.map(strips, (strip) => {
       let stripKey = _.get(_.keys(strip), '0')
       let stringCase = (stripKey === 'pH') ? stripKey : _.startCase(stripKey)
+      let value = !_.isUndefined(strip.selectedStripe.value) ? strip.selectedStripe.value : '-'
       return (
-      text += `${stringCase} : ${strip.selectedStripe.value}, `
+      text += `${stringCase} : ${value}, `
       )
     })
     Alert.alert(
@@ -46,23 +46,23 @@ class Strip extends React.Component {
       <ScrollView style={styles.container}>
         <KeyboardAvoidingView behavior='position'>
           <View paddingH-20>
-            <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
-              <Text style={{color: '#123362', fontSize: 30, fontWeight: '700'}}>Test Strip</Text>
-              <View style={{backgroundColor: '#a1a2a3', borderRadius: 15, padding: 8, justifyContent: 'center' }}>
+            <View style={styles.stripMainView}>
+              <Text style={styles.stripText}>Test Strip</Text>
+              <View style={styles.stripNextMainView}>
                 <TouchableWithoutFeedback onPress={() => this.showSelectedValues()}>
                   <Text color={'#fff'} style={{fontWeight: '700'}}>Next</Text>
                 </TouchableWithoutFeedback>
               </View>
             </View>
-            <View style={{flexDirection: 'row', paddingTop: 20}}>
-              <View style={{width: 25, flexDirection: 'column', justifyContent: 'space-around', backgroundColor: 'transparent', borderRadius: 5, borderWidth: 1, borderColor: '#aeafb0', marginRight: 10}}>
+            <View style={styles.leftColumn}>
+              <View style={styles.leftColumnView}>
                 {
                   _.map(strips, (strip, key) => {
                     let stripKey = _.get(_.keys(strip), '0')
                     let defaultValue = _.get(strip[stripKey], '0')
                     let color = _.isUndefined(strip.selectedStripe.color) ? defaultValue.color : strip.selectedStripe.color
                     return (
-                      <View key={key} style={{width: 23, height: 25, backgroundColor: color, marginTop: 18}} />
+                      <View key={key} style={[styles.leftBlock, { backgroundColor: color}]} />
                     )
                   })
                 }

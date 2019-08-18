@@ -42,6 +42,6 @@ export function * startup (action) {
   // }
 
   if (isUserLoggedIn || isUserSignedUp) {
-    // yield put(StackActions.reset({index: 0, actions: [NavigationActions.navigate({ routeName: 'Home' })]}));
+    yield put(StackActions.reset({index: 0, actions: [NavigationActions.navigate({ routeName: 'Home' })]}));
   }
 }

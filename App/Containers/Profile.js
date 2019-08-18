@@ -27,50 +27,21 @@ import ValidationComponent from 'react-native-form-validator'
 
 const isAndroid = (Platform.OS === 'android')
 
-const CropOptions = {
-  mediaType: 'photo',
-  cropping: isAndroid,
-  width: 1080,
-  height: 1080,
-  freeStyleCropEnabled: isAndroid
+const options = {
+  quality: 1.0,
+  maxWidth: 500,
+  maxHeight: 500,
+  allowsEditing: true,
+  noData: true,
+  storageOptions: {
+    skipBackup: true,
+    path: 'profilePhotos',
+    cameraRoll: true,
+    waitUntilSaved: true
+  }
 }
 
 class Profile extends ValidationComponent {
-
-  hideActionSheet = () => {
-    this.setState({actionSheetVisible: false})
-  }
-  showActionSheet = () => {
-    this.setState({actionSheetVisible: true})
-  }
-  validateForm = () => {
-    this.validate(this.validationRules)
-    let errorState = {}
-    const hasError =
-      Object.keys(this.validationRules).filter(fieldName => {
-        const fieldError = this.isFieldInError(fieldName)
-
-        errorState[`${fieldName}Error`] = this.getErrorsInField(fieldName)
-          .slice(-1)
-          .pop()
-        if (fieldName === 'password') {
-          return false
-        }
-        return fieldError
-      }).length !== 0
-
-    this.setState({...errorState})
-    return hasError
-  }
-  validateField = fieldName => {
-    this.validate(this.validationRules)
-    let errorState = {}
-    errorState[`${fieldName}Error`] = this.getErrorsInField(fieldName)
-      .slice(-1)
-      .pop()
-    this.setState({...errorState})
-  }
-
   constructor (props) {
     super(props)
     this.state = {
@@ -120,6 +91,9 @@ class Profile extends ValidationComponent {
         required: true
       }
     }
+    this.takeProfilePicture = this.takeProfilePicture.bind(this)
+    this.openPhoneLibrary = this.openPhoneLibrary.bind(this)
+    this.deleteProfilePicture = this.deleteProfilePicture.bind(this)
   }
 
   componentDidMount () {
@@ -131,71 +105,79 @@ class Profile extends ValidationComponent {
     }
   }
 
+  hideActionSheet = () => {
+    this.setState({actionSheetVisible: false})
+  }
+
+  showActionSheet = () => {
+    this.setState({actionSheetVisible: true})
+  }
+
+  validateForm = () => {
+    this.validate(this.validationRules)
+    let errorState = {}
+    const hasError =
+      Object.keys(this.validationRules).filter(fieldName => {
+        const fieldError = this.isFieldInError(fieldName)
+
+        errorState[`${fieldName}Error`] = this.getErrorsInField(fieldName)
+          .slice(-1)
+          .pop()
+        if (fieldName === 'password') {
+          return false
+        }
+        return fieldError
+      }).length !== 0
+
+    this.setState({...errorState})
+    return hasError
+  }
+
+  validateField = fieldName => {
+    this.validate(this.validationRules)
+    let errorState = {}
+    errorState[`${fieldName}Error`] = this.getErrorsInField(fieldName)
+      .slice(-1)
+      .pop()
+    this.setState({...errorState})
+  }
+
   takeProfilePicture () {
-    ImagePicker.launchCamera(CropOptions).then(response => {
-      // this.setPictureFromPhone(response)
+    ImagePicker.launchCamera(options, (response) => {
+      if (response.didCancel) {
+        console.log('User cancelled image picker')
+      }
+      else if (response.error) {
+        console.log('ImagePicker Error: ', response.error)
+      }
+      else {
+        this.setState({
+          profilePicture: response
+        })
+      }
     })
   }
 
   openPhoneLibrary () {
-    ImagePicker.launchImageLibrary(CropOptions).then(response => {
-      // this.setPictureFromPhone(response)
+    ImagePicker.launchImageLibrary(options, (response) => {
+      if (response.didCancel) {
+        console.log('User cancelled image picker')
+      }
+      else if (response.error) {
+        console.log('ImagePicker Error: ', response.error)
+      }
+      else {
+        this.setState({
+          profilePicture: response
+        })
+      }
     })
   }
 
-  async setPictureFromPhone (response, type) {
-    // if (response.didCancel) {
-    //   console.log('User cancelled image picker')
-    // }
-    // else if (response.error) {
-    //   console.log('ImagePicker Error: ', response.error)
-    // }
-    // else {
-    //   const formData = new FormData()
-    //
-    //   let imageResponse = response
-    //
-    //   if (imageResponse.width > 6000) {
-    //     Alert.alert(
-    //       '',
-    //       'This image is too large, please choose another',
-    //       [
-    //         {text: 'OK', onPress: () => console.log('ok')},
-    //       ],
-    //       {cancelable: false}
-    //     )
-    //     return
-    //   }
-    //
-    //   if (!isEmpty(imageResponse)) {
-    //     let uri = _.get(imageResponse, 'path')
-    //     let fileName = (uri !== 'undefined') ? _.last(uri.split('/')) : `${moment()}-Image`
-    //
-    //     if (type == 'coverPhoto') {
-    //       formData.append('cover_photo', {
-    //         uri: uri,
-    //         type: imageResponse.mime,
-    //         name: fileName
-    //       })
-    //
-    //       this.props.updatePicture(formData)
-    //     }
-    //
-    //     if (type == 'profilePhoto') {
-    //       formData.append('profile_photo', {
-    //         uri: uri,
-    //         type: imageResponse.mime,
-    //         name: fileName,
-    //       })
-    //
-    //       this.props.updatePicture(formData)
-    //     }
-    //   }
-    // }
-  }
-
   deleteProfilePicture () {
-    // this.props.deletePicture({type: (type == 'profilePhoto') ? 1 : 2})
+    this.setState({
+      profilePicture: null
+    })
   }
 
   manageProfile () {
@@ -286,7 +268,7 @@ class Profile extends ValidationComponent {
                         flexDirection: 'row',
                         justifyContent: 'center',
                         alignItems: 'center'
-                      }} onPress={() => {}}>
+                      }} onPress={() => this.showActionSheet()}>
                         <FontAwesomeIcon name='camera' style={{color: Colors.cyanBlue, fontSize: 15}}/>
                       </TouchableOpacity>
                     )
@@ -312,7 +294,7 @@ class Profile extends ValidationComponent {
             </View>
             <View style={{backgroundColor: '#fff', padding: 10, borderRadius: 5}}>
               <View style={{flexDirection: 'row'}}>
-                <View style={{marginRight: 20}}>
+                <View style={{marginRight: 10}}>
                   <TextInput
                     style={{width: '50%'}}
                     placeholder='First Name'
@@ -329,9 +311,9 @@ class Profile extends ValidationComponent {
                     editable={editProfile}
                   />
                 </View>
-                <View>
+                <View style={{marginRight: 10}}>
                   <TextInput
-                    style={{width: '50%', left: 10}}
+                    style={{width: '50%'}}
                     placeholder='Last Name'
                     autoCapitalize='none'
                     floatingPlaceholder
@@ -362,7 +344,7 @@ class Profile extends ValidationComponent {
                 editable={editProfile}
               />
               <View style={{flexDirection: 'row'}}>
-                <View style={{marginRight: 20}}>
+                <View style={{marginRight: 10}}>
                   <TextInput
                     style={{width: '50%'}}
                     placeholder='Phone'
@@ -379,7 +361,7 @@ class Profile extends ValidationComponent {
                     editable={editProfile}
                   />
                 </View>
-                <View>
+                <View style={{marginRight: 10}}>
                   <TextInput
                     style={{width: '50%'}}
                     placeholder='Join Date'
