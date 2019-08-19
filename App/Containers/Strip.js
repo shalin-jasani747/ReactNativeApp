@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react'
-import { ScrollView, KeyboardAvoidingView, TouchableWithoutFeedback, Alert } from 'react-native'
+import { ScrollView, KeyboardAvoidingView, TouchableWithoutFeedback, Alert, Platform } from 'react-native'
 import { connect } from 'react-redux'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 import StripActions from '../Redux/StripRedux'
@@ -62,7 +62,7 @@ class Strip extends React.Component {
                     let defaultValue = _.get(strip[stripKey], '0')
                     let color = _.isUndefined(strip.selectedStripe.color) ? defaultValue.color : strip.selectedStripe.color
                     return (
-                      <View key={key} style={[styles.leftBlock, { backgroundColor: color}]} />
+                      <View key={key} style={[styles.leftBlock, {backgroundColor: color}, Platform.OS === 'ios' ? {marginTop: 20} : {marginTop: 28}]} />
                     )
                   })
                 }

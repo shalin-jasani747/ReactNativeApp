@@ -29,7 +29,7 @@ class Video extends React.Component {
   render () {
     let {fetching, payload} = this.props.video
     return (
-      <View>
+      <View paddingT-10>
         <FlatList
           data={payload}
           refreshing={fetching}

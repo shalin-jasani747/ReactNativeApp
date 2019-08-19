@@ -5,7 +5,7 @@ import {
   ScrollView,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
-  TouchableOpacity,
+  TouchableHighlight,
   Platform
 } from 'react-native'
 import { View, Text, Button, Image, TextInput, Checkbox, ActionSheet } from 'react-native-ui-lib'
@@ -16,7 +16,6 @@ import ImagePicker from 'react-native-image-picker'
 // external libs
 import FeatherIcons from 'react-native-vector-icons/Feather'
 import { renderIf } from '../Services/helpers'
-import ViewOverflow from 'react-native-view-overflow'
 import ValidationComponent from 'react-native-form-validator'
 import _ from 'lodash'
 // Styles
@@ -189,21 +188,18 @@ class SignUp extends ValidationComponent {
               <View style={styles.mainView}>
                 {renderIf(profilePicture === null)(
                   <View style={styles.profilePicView}>
-                    <ViewOverflow>
-                      <TouchableOpacity style={styles.profilePicTouchable} onPress={() => this.showActionSheet()}>
+                      <TouchableHighlight style={styles.profilePicTouchable} onPress={() => this.showActionSheet()}>
                         <FeatherIcons name='camera' style={styles.profilePicIcon} />
-                      </TouchableOpacity>
-                    </ViewOverflow>
+                      </TouchableHighlight>
                   </View>
                 )
                 }
                 {renderIf(profilePicture !== null)(
                   <View>
-                    <Image source={{uri: _.get(profilePicture, 'uri')}}
-                           style={styles.profilePicImage} />
-                    <TouchableOpacity style={styles.profilePicTouchable} onPress={() => this.showActionSheet()}>
+                    <Image source={{uri: _.get(profilePicture, 'uri')}} style={styles.profilePicImage} />
+                    <TouchableHighlight style={styles.profilePicTouchable} onPress={() => this.showActionSheet()}>
                       <FeatherIcons name='camera' style={styles.profilePicIcon} />
-                    </TouchableOpacity>
+                    </TouchableHighlight>
                   </View>
                 )
                 }

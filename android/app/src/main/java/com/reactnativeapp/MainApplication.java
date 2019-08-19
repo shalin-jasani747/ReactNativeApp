@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.facebook.react.ReactApplication;
 import cl.json.RNSharePackage;
+import cl.json.ShareApplication;
 import com.brentvatne.react.ReactVideoPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
@@ -42,7 +43,7 @@ public class MainApplication extends Application implements ReactApplication {
             new RNViewOverflowPackage(),
             new RNI18nPackage(),
             new VectorIconsPackage(),
-            new RNGestureHandlerPackage()
+            new RNGestureHandlerPackage(),
             new HighlighterViewPackage(),
             new TextInputDelKeyHandlerPackage(),
             new WheelPickerPackage()

@@ -1,11 +1,10 @@
 // @flow
 
 import React from 'react'
-import { ScrollView, KeyboardAvoidingView, TouchableOpacity, TouchableWithoutFeedback, Platform } from 'react-native'
+import { ScrollView, KeyboardAvoidingView, TouchableHighlight, Platform } from 'react-native'
 import { connect } from 'react-redux'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
-import { Metrics } from '../Themes'
 // external libs
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome'
 import Ionicons from 'react-native-vector-icons/Ionicons'
@@ -14,12 +13,8 @@ import EvilIcons from 'react-native-vector-icons/EvilIcons'
 // Styles
 import styles from './Styles/ProfileStyle'
 
-// I18n
-import I18n from 'react-native-i18n'
 import { ActionSheet, Button, Image, TextInput, View, Text } from 'react-native-ui-lib'
 import { renderIf } from '../Services/helpers'
-import ViewOverflow from 'react-native-view-overflow'
-import Colors from '../Themes/Colors'
 import _ from 'lodash'
 import ImagePicker from 'react-native-image-picker'
 import LoginActions from '../Redux/LoginRedux'
@@ -219,58 +214,27 @@ class Profile extends ValidationComponent {
             <Text style={{fontSize: 18, fontWeight: '700'}}>Profile</Text>
           </View>
           <View padding-20>
-            <View style={{
-              justifyContent: 'flex-start',
-              alignItems: 'center',
-              marginTop: 10,
-              marginBottom: 10,
-              flexDirection: 'row'
-            }}>
+            <View style={styles.profileImageView}>
               {renderIf(profilePicture === null)(
-                <View style={{backgroundColor: '#e9e6e6', borderRadius: 50, width: 100, height: 100}}>
-                  <ViewOverflow>
+                <View style={styles.nullProfileView}>
                     {
                       renderIf(editProfile)(
-                        <TouchableOpacity style={{
-                          position: 'absolute',
-                          top: 60,
-                          right: -10,
-                          height: 30,
-                          width: 30,
-                          backgroundColor: '#fff',
-                          borderRadius: 15,
-                          flexDirection: 'row',
-                          justifyContent: 'center',
-                          alignItems: 'center'
-                        }} onPress={() => this.showActionSheet()}>
-                          <FontAwesomeIcon name='camera' style={{color: Colors.cyanBlue, fontSize: 15}}/>
-                        </TouchableOpacity>
+                        <TouchableHighlight style={styles.touchable} onPress={() => this.showActionSheet()}>
+                          <FontAwesomeIcon name='camera' style={styles.font} />
+                        </TouchableHighlight>
                       )
                     }
-                  </ViewOverflow>
                 </View>
               )
               }
               {renderIf(profilePicture !== null)(
                 <View>
-                  <Image source={{uri: _.get(profilePicture, 'uri')}}
-                         style={{borderRadius: 50, width: 100, height: 100}}/>
+                  <Image source={{uri: _.get(profilePicture, 'uri')}} style={{borderRadius: 50, width: 100, height: 100}}/>
                   {
                     renderIf(editProfile)(
-                      <TouchableOpacity style={{
-                        position: 'absolute',
-                        top: 60,
-                        right: -10,
-                        height: 30,
-                        width: 30,
-                        backgroundColor: '#fff',
-                        borderRadius: 15,
-                        flexDirection: 'row',
-                        justifyContent: 'center',
-                        alignItems: 'center'
-                      }} onPress={() => this.showActionSheet()}>
-                        <FontAwesomeIcon name='camera' style={{color: Colors.cyanBlue, fontSize: 15}}/>
-                      </TouchableOpacity>
+                      <TouchableHighlight style={styles.touchable} onPress={() => this.showActionSheet()}>
+                        <FontAwesomeIcon name='camera' style={styles.font} />
+                      </TouchableHighlight>
                     )
                   }
                 </View>
@@ -290,11 +254,11 @@ class Profile extends ValidationComponent {
                 useNativeIOS={!isAndroid}
                 onDismiss={this.hideActionSheet}
               />
-              <Text style={{fontSize: 20, fontWeight: '700', marginLeft: 30}}>Hello,</Text>
+              <Text style={styles.helloText}>Hello,</Text>
             </View>
-            <View style={{backgroundColor: '#fff', padding: 10, borderRadius: 5}}>
+            <View style={styles.profileDetails}>
               <View style={{flexDirection: 'row'}}>
-                <View style={{marginRight: 10}}>
+                <View marginR-10>
                   <TextInput
                     style={{width: '50%'}}
                     placeholder='First Name'
@@ -311,7 +275,7 @@ class Profile extends ValidationComponent {
                     editable={editProfile}
                   />
                 </View>
-                <View style={{marginRight: 10}}>
+                <View marginR-10>
                   <TextInput
                     style={{width: '50%'}}
                     placeholder='Last Name'
@@ -344,7 +308,7 @@ class Profile extends ValidationComponent {
                 editable={editProfile}
               />
               <View style={{flexDirection: 'row'}}>
-                <View style={{marginRight: 10}}>
+                <View marginR-10>
                   <TextInput
                     style={{width: '50%'}}
                     placeholder='Phone'
@@ -361,7 +325,7 @@ class Profile extends ValidationComponent {
                     editable={editProfile}
                   />
                 </View>
-                <View style={{marginRight: 10}}>
+                <View marginR-10>
                   <TextInput
                     style={{width: '50%'}}
                     placeholder='Join Date'
@@ -394,32 +358,16 @@ class Profile extends ValidationComponent {
                 editable={editProfile}
               />
             </View>
-            <View style={{
-              marginTop: 10,
-              backgroundColor: '#fff',
-              height: 40,
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              borderRadius: 5,
-              padding: 5
-            }}>
+            <View style={styles.changePasswordView}>
               <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                <View style={{
-                  backgroundColor: '#f2f4f7',
-                  width: 30,
-                  height: 30,
-                  borderRadius: 15,
-                  justifyContent: 'center',
-                  alignItems: 'center'
-                }}>
-                  <EvilIcons name={'lock'} style={{fontSize: 22, color: '#76adf0'}}/>
+                <View style={styles.icon}>
+                  <EvilIcons name={'lock'} style={{fontSize: 22, color: '#76adf0'}} />
                 </View>
-                <Text style={{fontSize: 15, fontWeight: '700', marginLeft: 15}}>Changed Password</Text>
+                <Text style={styles.passwordText}>Changed Password</Text>
               </View>
-              <Ionicons name={'ios-arrow-forward'} style={{fontSize: 20, color: '#76adf0'}}/>
+              <Ionicons name={'ios-arrow-forward'} style={{fontSize: 20, color: '#76adf0'}} />
             </View>
-            <View paddingT-30 style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+            <View paddingT-30 style={styles.buttonView}>
               <Button
                 backgroundColor='#4d95ef'
                 borderRadius={5}

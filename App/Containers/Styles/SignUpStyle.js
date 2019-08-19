@@ -7,7 +7,7 @@ export default StyleSheet.create({
   ...ApplicationStyles.screen,
   signUpText: {fontSize: 18, fontWeight: '700'},
   mainView: {justifyContent: 'center', alignItems: 'center', marginTop: 10},
-  profilePicView: {backgroundColor: '#e9e6e6', borderRadius: 50, width: 100, height: 100},
+  profilePicView: {backgroundColor: '#e9e6e6', borderRadius: 50, width: 100, height: 100, zIndex: 500},
   profilePicTouchable: {
     position: 'absolute',
     top: 60,
@@ -18,7 +18,8 @@ export default StyleSheet.create({
     borderRadius: 15,
     flexDirection: 'row',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    zIndex: 1000
   },
   profilePicIcon: {color: '#fff', fontSize: 15},
   profilePicImage: {borderRadius: 50, width: 100, height: 100},

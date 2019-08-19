@@ -10,5 +10,5 @@ export default StyleSheet.create({
   stripNextMainView: {backgroundColor: '#a1a2a3', borderRadius: 15, padding: 8, justifyContent: 'center' },
   leftColumn: {flexDirection: 'row', paddingTop: 20},
   leftColumnView: {width: 25, flexDirection: 'column', justifyContent: 'space-around', backgroundColor: 'transparent', borderRadius: 5, borderWidth: 1, borderColor: '#aeafb0', marginRight: 10},
-  leftBlock: {width: 23, height: 25, marginTop: 18}
+  leftBlock: {width: 23, height: 25}
 })
